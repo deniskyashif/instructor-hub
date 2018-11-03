@@ -1,0 +1,16 @@
+<div class="container">
+  <h3>Courses</h3>
+  <div class="row">
+    <div class="col-6">
+      <div class="list-group-item list-group-item-action flex-column align-items-start add-course" [routerLink]="['create']">
+        <div class="d-flex w-100 justify-content-between">
+          +
+        </div>
+      </div>
+      <app-course-list [courses]="courses$ | async" [selectedCourse]="selectedCourse$ | async" (courseSelect)="toggleSelectCourse($event)"></app-course-list>
+    </div>
+    <div class="col-6">
+      <app-course-details [course]="selectedCourse$ | async" (delete)="delete($event)"></app-course-details>
+    </div>
+  </div>
+</div>

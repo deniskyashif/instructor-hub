@@ -1,0 +1,14 @@
+<div *ngIf="course">
+  <h3>{{course.title}}</h3>
+  <p>{{course.description}}</p>
+  <h4>Applications</h4>
+  <ul class="list-group">
+    <li *ngFor="let app of course.applications" class="list-group-item d-flex justify-content-between align-items-center">
+      <span>{{app.instructor}}</span>&nbsp;
+      <span class="badge badge-primary badge-pill">${{app.offeredRate}}/day</span>
+    </li>
+  </ul>
+  <div>
+    <button (click)="onDeleteClick(course)" class="btn btn-danger">Delete</button>
+  </div>
+</div>

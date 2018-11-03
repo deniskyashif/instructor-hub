@@ -1,0 +1,13 @@
+<div>
+  <div class="list-group">
+    <div *ngFor="let course of courses" (click)="onCourseClick(course)" [ngClass]="{ 'active': course === selectedCourse }"
+      class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{course.title}}</h5>
+      </div>
+      <p class="mb-1">
+        {{course.description | substring:60}}...
+      </p>
+    </div>
+  </div>
+</div>
