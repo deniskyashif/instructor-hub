@@ -10,6 +10,9 @@ import { coursesReducer } from './state/courses.reducer';
 import { CreateCourseComponent } from './containers/create-course/create-course.component';
 import { CreateCourseFormComponent } from './components/create-course-form/create-course-form.component';
 import { SharedModule } from '../shared/shared.module';
+import { CoursesApiService } from './services/courses.api.service';
+import { EffectsModule } from '@ngrx/effects';
+import { CoursesEffects } from './effects/courses.effects';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,11 @@ import { SharedModule } from '../shared/shared.module';
     SharedModule,
     FormsModule,
     CoursesRoutingModule,
-    StoreModule.forFeature('courses', coursesReducer)
+    StoreModule.forFeature('courses', coursesReducer),
+    EffectsModule.forFeature([CoursesEffects])
+  ],
+  providers: [
+    CoursesApiService
   ]
 })
 export class CoursesModule { }

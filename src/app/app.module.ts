@@ -9,7 +9,6 @@ import { CoreModule } from './core/core.module';
 import { AuthModule } from './auth/auth.module';
 import { AppComponent } from './core/containers/app.component';
 import { storeFreeze } from 'ngrx-store-freeze';
-import { AuthEffects } from './auth/effects/auth.effects';
 
 @NgModule({
   declarations: [],

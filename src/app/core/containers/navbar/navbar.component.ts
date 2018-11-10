@@ -16,9 +16,11 @@ export class NavbarComponent {
   title = "Instructor Hub";
 
   isLoggedIn$: Observable<boolean>;
+  currentUserName$: Observable<string>;
 
   constructor(private store: Store<fromRoot.State>) {
     this.isLoggedIn$ = this.store.select(fromAuth.getIsLoggedIn);
+    this.currentUserName$ = this.store.select(fromAuth.getCurrentUserName);
   }
 
   logout() {

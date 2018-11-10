@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item" *ngIf="isLoggedIn$ | async">
-          <a class="nav-link" (click)="logout()">Denis | Logout</a>
+          <a class="nav-link" (click)="logout()">{{currentUserName$ | async}} | Logout</a>
         </li>
         <li class="nav-item" routerLinkActive="active" *ngIf="isLoggedIn$ | async">
           <a class="nav-link" routerLink="/courses">Courses</a>

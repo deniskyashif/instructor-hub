@@ -16,7 +16,7 @@ export class AuthApiService {
       return throwError('Invalid login credentials.');
     }
 
-    return of({ username: credentials.username }).pipe(delay(1000));
+    return of({ username: credentials.username }).pipe(delay(500));
   }
 
   logout() {

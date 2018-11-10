@@ -16,7 +16,7 @@ export class AuthEffects {
     ofType<Login>(AuthActionTypes.Login),
     map(action => action.payload),
     exhaustMap((auth: Auth) =>
-      this.authService.login(auth).pipe(
+      this.authApi.login(auth).pipe(
         map(user => new LoginSuccess({ username: auth.username })),
         catchError(err => of(new LoginFailure(err)))
       )));
@@ -32,7 +32,7 @@ export class AuthEffects {
     tap(authenticated => this.router.navigate(['/login'])));
 
   constructor(private actions$: Actions,
-    private authService: AuthApiService,
+    private authApi: AuthApiService,
     private router: Router
     ) { }
 }

@@ -20,6 +20,7 @@ export class CourseBoardComponent implements OnInit {
   constructor(private store: Store<fromCourses.State>) { }
 
   ngOnInit() {
+    this.store.dispatch(new CourseActions.Get());
     this.courses$ = this.store.pipe(select(fromCourses.getCourseList));
     this.selectedCourse$ = this.store.pipe(select(fromCourses.getSelectedCourse));
   }
@@ -34,5 +35,9 @@ export class CourseBoardComponent implements OnInit {
 
   delete(course: Course) {
     this.store.dispatch(new CourseActions.Delete(course));
+  }
+
+  search(query: string) {
+    this.store.dispatch(new CourseActions.Get(query));
   }
 }
