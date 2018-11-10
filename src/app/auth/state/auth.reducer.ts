@@ -58,4 +58,4 @@ export const getIsLoggedIn = createSelector(getAuthState, s => s.isLoggedIn);
 export const getLoginPending = createSelector(getAuthState, s => s.loginPending);
 export const getErrorMessage = createSelector(getAuthState, s => s.errorMessage);
 export const getCurrentUser = createSelector(getAuthState, s => s.currentUser);
-export const getCurrentUserName = createSelector(getCurrentUser, u => u.username);
+export const getCurrentUserName = createSelector(getCurrentUser, u => u ? u.username : '');

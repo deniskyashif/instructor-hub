@@ -17,7 +17,7 @@ export class CourseDetailsComponent {
   delete = new EventEmitter<Course>();
 
   @Output()
-  applicationStatusChange = new EventEmitter<{app: Application, status: ApplicationStatus}>();
+  applicationStatusChange = new EventEmitter<{course: Course, app: Application, status: ApplicationStatus}>();
 
   constructor() { }
 
@@ -25,8 +25,9 @@ export class CourseDetailsComponent {
     this.delete.emit(course);
   }
 
-  onStatusChange(event, app: Application) {
+  onStatusChange(event, course: Course, app: Application) {
     this.applicationStatusChange.emit({
+      course,
       app,
       status: <ApplicationStatus>ApplicationStatus[event.target.value]
     });

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Course } from '../models/course.model';
-import { ApplicationStatus } from '../models/application';
+import { ApplicationStatus, Application } from '../models/application';
 import { of, merge, Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { allCourses } from './data';
 
-let courseList = allCourses;
+let courses = allCourses;
 
 @Injectable({
   providedIn: 'root'
@@ -19,18 +19,35 @@ export class CoursesApiService {
     const predicate = (c: Course) =>
       c.title.toLowerCase().indexOf(lowerCasedQuery) > -1 || c.description.toLowerCase().indexOf(lowerCasedQuery) > -1;
 
-    return  of(courseList.filter(predicate)).pipe(delay(500));
+    return of(courses.filter(predicate)).pipe(delay(500));
   }
 
   create(course: Course): Observable<Course> {
-    course.id = courseList.length + 1;
-    courseList.push(course);
+    const newCourse = {
+      ...course,
+      id: courses.length[courses.length - 1].id + 1
+    }
 
-    return of(course).pipe(delay(500));
+    courses = [...courses, newCourse];
+
+    return of(newCourse).pipe(delay(250));
   }
 
   delete(course: Course): Observable<Course> {
-    courseList = courseList.filter(c => c.id !== course.id);
-    return of(course).pipe(delay(500));
+    courses = courses.filter(c => c.id !== course.id);
+    return of(course).pipe(delay(250));
+  }
+
+  changeApplicationState(course: Course, application: Application, status: ApplicationStatus): Observable<Course> {
+    const updatedApplication = { ...application, status };
+
+    const courseToUpdate = {
+      ...(courses.find(c => c.id === course.id)),
+      applications: course.applications.map(app => app.id === updatedApplication.id ? updatedApplication : app)
+    }
+
+    courses = courses.map(c => c.id === courseToUpdate.id ? courseToUpdate : c);
+
+    return of(courseToUpdate).pipe(delay(250));
   }
 }

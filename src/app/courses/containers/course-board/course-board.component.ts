@@ -29,8 +29,8 @@ export class CourseBoardComponent implements OnInit {
     this.store.dispatch(new CourseActions.ToggleSelected(course.id));
   }
 
-  updateApplicationStatus(event: {app: Application, status: ApplicationStatus}) {
-    this.store.dispatch(new CourseActions.ChangeApplicationState(event));
+  updateApplicationStatus(event: {course: Course, app: Application, status: ApplicationStatus}) {
+    this.store.dispatch(new CourseActions.ChangeApplicationStatus(event));
   }
 
   delete(course: Course) {

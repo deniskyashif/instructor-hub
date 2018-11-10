@@ -1,4 +1,4 @@
-import { CourseActionsUnion, CourseActionTypes, ChangeApplicationState, GetSuccess } from './course.actions';
+import { CourseActionsUnion, CourseActionTypes, ChangeApplicationStatus, GetSuccess } from './course.actions';
 import { Course } from '../models/course.model';
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import * as fromRoot from './../../core/state/app.reducers';
@@ -25,8 +25,19 @@ export function coursesReducer(state: CoursesState = initialState, action: Cours
         ...state,
         courseList: action.payload
       }
+    case CourseActionTypes.CreateSuccess:
+      return {
+        ...state,
+        courseList: [...state.courseList, action.payload]
+      };
+    case CourseActionTypes.DeleteSuccess:
+      return {
+        courseList: state.courseList.filter(c => c.id !== action.payload.id),
+        selectedCourse: state.selectedCourse.id === action.payload.id ? null : state.selectedCourse
+      };
     case CourseActionTypes.ToggleSelected:
       let selected;
+
       if (!state.selectedCourse || state.selectedCourse.id !== action.payload) {
         selected = state.courseList.find(c => c.id === action.payload);
       }
@@ -35,40 +46,10 @@ export function coursesReducer(state: CoursesState = initialState, action: Cours
         ...state,
         selectedCourse: selected
       };
-    case CourseActionTypes.Create:
-      const course = {
-       ...action.payload,
-       id: state.courseList.length + 1
-      }
-
+    case CourseActionTypes.ChangeApplicationStatusSuccess:
       return {
-        ...state,
-        courseList: [...state.courseList, course]
-      };
-    case CourseActionTypes.Delete:
-      return {
-        courseList: state.courseList.filter(c => c !== action.payload),
-        selectedCourse: state.selectedCourse === action.payload ? null : state.selectedCourse
-      };
-    case CourseActionTypes.ChangeApplicationState:
-      const updatedApplications = state.selectedCourse.applications.map(app => {
-        if(app === action.payload.app) {
-          return {
-            ...app,
-            status: action.payload.status
-          }
-        }
-        return app;
-      });
-
-      const selectedCourse: Course = {
-        ...state.selectedCourse,
-        applications: updatedApplications
-      };
-
-      return {
-        ...state,
-        selectedCourse: selectedCourse
+        courseList: state.courseList.map(c => c.id === action.payload.id ? action.payload : c),
+        selectedCourse: state.selectedCourse.id === action.payload.id ? action.payload : state.selectedCourse
       };
     default:
       return state;

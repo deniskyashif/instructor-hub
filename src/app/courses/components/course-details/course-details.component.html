@@ -6,7 +6,7 @@
     <li *ngFor="let app of course.applications"
       class="list-group-item d-flex justify-content-between align-items-center application {{getStatusClassName(app.status)}}">
       <span>
-        <select name="status" id="status" class="form-control" (change)="onStatusChange($event, app)">
+        <select name="status" id="status" class="form-control" (change)="onStatusChange($event, course, app)">
           <option value="Pending" [selected]="app.status === 'Pending'">Pending</option>
           <option value="Accepted" [selected]="app.status === 'Accepted'">Accepted</option>
           <option value="Rejected" [selected]="app.status === 'Rejected'">Rejected</option>
