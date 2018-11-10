@@ -45,6 +45,7 @@ export function authReducer(state: AuthState = initialState, action: AuthActions
       };
     case AuthActionTypes.Logout:
       return {
+        ...state,
         isLoggedIn: false,
         currentUser: null
       };
