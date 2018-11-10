@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { AuthModule } from './auth/auth.module';
 import { AppComponent } from './core/containers/app.component';
+import { storeFreeze } from 'ngrx-store-freeze';
 
 @NgModule({
   declarations: [],
@@ -16,7 +17,7 @@ import { AppComponent } from './core/containers/app.component';
     CoreModule,
     AuthModule,
     AppRoutingModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot({}, {metaReducers: [storeFreeze]}),
     StoreDevtoolsModule.instrument({
       name: 'Instructor Hub Store DevTools',
     })

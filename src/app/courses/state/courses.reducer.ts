@@ -1,7 +1,8 @@
-import { CourseActionsUnion, CourseActionTypes } from './course.actions';
+import { CourseActionsUnion, CourseActionTypes, ChangeApplicationState } from './course.actions';
 import { Course } from '../models/course.model';
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import * as fromRoot from './../../core/state/app.reducers';
+import { ApplicationStatus } from '../models/application';
 
 export interface CoursesState {
   readonly courseList: Course[];
@@ -19,10 +20,10 @@ const initialState: CoursesState = {
       title: 'Mongo DB for Administrators',
       description: `We have a client in the UK who is looking for an experienced Mongo DB instructor who can teach a course before Christmas 2018. They request a delivery based on the two 2-day courses "Mongo DB for Administrators"and "Mongo DB for Analysts". Currently this is planned to run over the full 4 days, but it is up for discussion. Also, feel free to include your availability when applying as the dates are not yet fixed.`,
       applications: [
-        { instructor: 'John Moss', offeredRate: 100 },
-        { instructor: 'Mike Dean', offeredRate: 65 },
-        { instructor: 'Amy Fearn', offeredRate: 300 },
-        { instructor: 'Micheal Oliver', offeredRate: 200 }
+        { instructor: 'John Moss', offeredRate: 100, status: ApplicationStatus.Pending },
+        { instructor: 'Mike Dean', offeredRate: 65, status: ApplicationStatus.Rejected },
+        { instructor: 'Amy Fearn', offeredRate: 300, status: ApplicationStatus.Pending },
+        { instructor: 'Micheal Oliver', offeredRate: 200, status: ApplicationStatus.Pending }
       ]
     },
     {
@@ -30,7 +31,7 @@ const initialState: CoursesState = {
       title: 'Neural Networks for Pattern Recognition',
       description: 'Location: Sofia BG',
       applications: [
-        { instructor: 'Sian Massey-Ellis', offeredRate: 120 },
+        { instructor: 'Sian Massey-Ellis', offeredRate: 120, status: ApplicationStatus.Pending },
       ]
     },
     {
@@ -38,8 +39,8 @@ const initialState: CoursesState = {
       title: 'MS Dynamics 365',
       description: `A course on Dynamics 365 requested for Ireland. There is no fixed time frame yet, so the date could depend on the instructor's availability. The course covers provisioning, managing and creating a portal; Liquid operatiors; Web forms. The full course outline is attached to this job and can be downloaded from the link below.`,
       applications: [
-        { instructor: 'Phil Dowd', offeredRate: 250 },
-        { instructor: 'Mark Clattenburg', offeredRate: 165 }
+        { instructor: 'Phil Dowd', offeredRate: 250, status: ApplicationStatus.Rejected },
+        { instructor: 'Mark Clattenburg', offeredRate: 165, status: ApplicationStatus.Accepted }
       ]
     }
   ],
@@ -53,20 +54,45 @@ export function coursesReducer(state: CoursesState = initialState, action: Cours
       if (!state.selectedCourse || state.selectedCourse.id !== action.payload) {
         selected = state.courseList.find(c => c.id === action.payload);
       }
+
       return {
-        courseList: state.courseList,
+        ...state,
         selectedCourse: selected
       };
     case CourseActionTypes.Create:
-      action.payload.id = state.courseList.length + 1;
+      const course = {
+       ...action.payload,
+       id: state.courseList.length + 1
+      }
+
       return {
-        courseList: [...state.courseList, action.payload],
-        selectedCourse: state.selectedCourse
+        ...state,
+        courseList: [...state.courseList, course]
       };
     case CourseActionTypes.Delete:
       return {
         courseList: state.courseList.filter(c => c !== action.payload),
         selectedCourse: state.selectedCourse === action.payload ? null : state.selectedCourse
+      };
+    case CourseActionTypes.ChangeApplicationState:
+      const updatedApplications = state.selectedCourse.applications.map(app => {
+        if(app === action.payload.app) {
+          return {
+            ...app,
+            status: action.payload.status
+          }
+        }
+        return app;
+      });
+
+      const selectedCourse: Course = {
+        ...state.selectedCourse,
+        applications: updatedApplications
+      };
+
+      return {
+        ...state,
+        selectedCourse: selectedCourse
       };
     default:
       return state;

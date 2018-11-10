@@ -1,10 +1,12 @@
 import { Action } from '@ngrx/store';
 import { Course } from '../models/course.model';
+import { Application, ApplicationStatus } from '../models/application';
 
 export enum CourseActionTypes {
   Create = '[COURSE] Create',
   Delete = '[COURSE] Delete',
-  ToggleSelected = '[COURSE] ToggleSelected'
+  ToggleSelected = '[COURSE] ToggleSelected',
+  ChangeApplicationState = '[COURSE] ChangeApplicationState'
 }
 
 export class ToggleSelected implements Action {
@@ -25,4 +27,10 @@ export class Delete implements Action {
   constructor(public payload: Course) { }
 }
 
-export type CourseActionsUnion = ToggleSelected | Create | Delete;
+export class ChangeApplicationState implements Action {
+  readonly type = CourseActionTypes.ChangeApplicationState;
+
+  constructor(public payload: { app: Application, status: ApplicationStatus}) { }
+}
+
+export type CourseActionsUnion = ToggleSelected | Create | Delete | ChangeApplicationState;

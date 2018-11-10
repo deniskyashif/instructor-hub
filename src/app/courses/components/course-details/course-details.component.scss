@@ -1,7 +1,23 @@
 .list-group {
   margin-bottom: 15px;
 
-  .list-group-item:hover {
+  .application {
+    margin-bottom: 5px;
+  }
+
+  .application.pending {
+    border: inherit;
+  }
+
+  .application.accepted {
+    border: 1px solid green;
+  }
+
+  .application.rejected {
+    border: 1px solid red;
+  }
+
+  .application:hover {
     background-color: #f8f9fa;
   }
 }

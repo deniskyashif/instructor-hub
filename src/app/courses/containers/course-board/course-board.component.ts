@@ -4,6 +4,7 @@ import { Store, select, createSelector, createFeatureSelector } from '@ngrx/stor
 import { Observable } from 'rxjs';
 import * as CourseActions from './../../state/course.actions';
 import * as fromCourses from '../../state/courses.reducer';
+import { Application, ApplicationStatus } from '../../models/application';
 
 @Component({
   selector: 'app-course-board',
@@ -25,6 +26,10 @@ export class CourseBoardComponent implements OnInit {
 
   toggleSelectCourse(course: Course) {
     this.store.dispatch(new CourseActions.ToggleSelected(course.id));
+  }
+
+  updateApplicationStatus(event: {app: Application, status: ApplicationStatus}) {
+    this.store.dispatch(new CourseActions.ChangeApplicationState(event));
   }
 
   delete(course: Course) {
