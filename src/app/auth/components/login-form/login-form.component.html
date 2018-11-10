@@ -8,4 +8,8 @@
   <div class="form-group">
     <button (click)="loginClick(username.value, password.value)" class="btn btn-primary">Login</button>
   </div>
+  <p *ngIf="errorMessage" class="login-error">
+    {{errorMessage}}
+  </p>
+  <p *ngIf="loginPending">Loading...</p>
 </div>

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError, of } from 'rxjs';
 import { User } from '../models/user.model';
 import { Auth } from '../models/auth.model';
+import { delay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class AuthApiService {
       return throwError('Invalid login credentials.');
     }
 
-    return of({ username: credentials.username });
+    return of({ username: credentials.username }).pipe(delay(1000));
   }
 
   logout() {

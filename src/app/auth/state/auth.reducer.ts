@@ -26,7 +26,8 @@ export function authReducer(state: AuthState = initialState, action: AuthActions
     case AuthActionTypes.Login:
       return {
         ...state,
-        loginPending: true
+        loginPending: true,
+        errorMessage: ''
       };
     case AuthActionTypes.LoginSuccess:
       return {
@@ -35,8 +36,6 @@ export function authReducer(state: AuthState = initialState, action: AuthActions
         loginPending: false,
         errorMessage: ''
       };
-    case AuthActionTypes.LoginRedirect:
-      return { ...state };
     case AuthActionTypes.LoginFailure:
       return {
         ...state,
@@ -54,5 +53,7 @@ export function authReducer(state: AuthState = initialState, action: AuthActions
   }
 }
 
-export const getAuthStatusState = createFeatureSelector<State, AuthState>('auth');
-export const getIsLoggedIn = createSelector(getAuthStatusState, s => s.isLoggedIn);
+export const getAuthState = createFeatureSelector<State, AuthState>('auth');
+export const getIsLoggedIn = createSelector(getAuthState, s => s.isLoggedIn);
+export const getLoginPending = createSelector(getAuthState, s => s.loginPending);
+export const getErrorMessage = createSelector(getAuthState, s => s.errorMessage);

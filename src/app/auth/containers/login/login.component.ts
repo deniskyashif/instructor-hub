@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import * as fromAuth from '../../state/auth.reducer';
 import * as AuthActions from './../../state/auth.actions';
 import { Auth } from '../../models/auth.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -10,10 +11,15 @@ import { Auth } from '../../models/auth.model';
 })
 export class LoginComponent {
 
-  constructor(private store: Store<fromAuth.State>) { }
+  loginPending$: Observable<boolean>;
+  errorMessage$: Observable<string>;
+
+  constructor(private store: Store<fromAuth.State>) {
+    this.loginPending$ = this.store.select(fromAuth.getLoginPending);
+    this.errorMessage$ = this.store.select(fromAuth.getErrorMessage);
+  }
 
   loginSubmit(credentials: Auth) {
-    const user = { username: credentials.username };
     this.store.dispatch(new AuthActions.Login(credentials));
   }
 }

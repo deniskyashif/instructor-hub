@@ -1,5 +1,8 @@
 <div class="container">
   <div class="col-4">
-    <app-login-form (submit)="loginSubmit($event)"></app-login-form>
+    <app-login-form (submit)="loginSubmit($event)"
+      [errorMessage]="errorMessage$ | async"
+      [loginPending]="loginPending$ | async">
+    </app-login-form>
   </div>
 </div>
