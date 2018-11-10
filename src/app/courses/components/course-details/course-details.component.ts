@@ -26,7 +26,6 @@ export class CourseDetailsComponent {
   }
 
   onStatusChange(event, app: Application) {
-
     this.applicationStatusChange.emit({
       app,
       status: <ApplicationStatus>ApplicationStatus[event.target.value]

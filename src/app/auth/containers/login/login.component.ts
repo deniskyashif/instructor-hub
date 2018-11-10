@@ -6,8 +6,7 @@ import { Auth } from '../../models/auth.model';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  templateUrl: './login.component.html'
 })
 export class LoginComponent {
 
@@ -15,6 +14,6 @@ export class LoginComponent {
 
   loginSubmit(credentials: Auth) {
     const user = { username: credentials.username };
-    this.store.dispatch(new AuthActions.LoginSuccess({ user }));
+    this.store.dispatch(new AuthActions.Login(credentials));
   }
 }
