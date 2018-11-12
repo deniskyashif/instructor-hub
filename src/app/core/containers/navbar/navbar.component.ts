@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import * as fromRoot from './../../state/app.reducers';
 import * as fromAuth from './../../../auth/state/auth.reducer';
 import * as AuthActions from './../../../auth/state/auth.actions';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 
 @Component({
   selector: 'app-navbar',
@@ -13,14 +13,14 @@ import { Store } from '@ngrx/store';
 })
 export class NavbarComponent {
 
-  title = "Instructor Hub";
+  title = 'Instructor Hub';
 
   isLoggedIn$: Observable<boolean>;
   currentUserName$: Observable<string>;
 
   constructor(private store: Store<fromRoot.State>) {
-    this.isLoggedIn$ = this.store.select(fromAuth.getIsLoggedIn);
-    this.currentUserName$ = this.store.select(fromAuth.getCurrentUserName);
+    this.isLoggedIn$ = this.store.pipe(select(fromAuth.getIsLoggedIn));
+    this.currentUserName$ = this.store.pipe(select(fromAuth.getCurrentUserName));
   }
 
   logout() {

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SubstringPipe } from './pipes/substring.pipe';
 
-const PIPES = [SubstringPipe]
+const PIPES = [SubstringPipe];
 
 @NgModule({
   declarations: PIPES,

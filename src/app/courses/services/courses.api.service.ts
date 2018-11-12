@@ -7,19 +7,16 @@ import { allCourses } from './data';
 
 let courses = allCourses;
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class CoursesApiService {
 
   constructor() { }
 
-  private baseUrl = '/api/courses';
-
   get(query: string): Observable<Course[]> {
     const lowerCasedQuery = query.toLowerCase();
     const predicate = (c: Course) =>
-      c.title.toLowerCase().indexOf(lowerCasedQuery) > -1 || c.description.toLowerCase().indexOf(lowerCasedQuery) > -1;
+      c.title.toLowerCase().indexOf(lowerCasedQuery) > -1 ||
+      c.description.toLowerCase().indexOf(lowerCasedQuery) > -1;
 
     return of(courses.filter(predicate)).pipe(delay(500));
   }
@@ -28,7 +25,7 @@ export class CoursesApiService {
     const newCourse = {
       ...course,
       id: courses[courses.length - 1].id + 1
-    }
+    };
 
     courses = [...courses, newCourse];
 
@@ -46,7 +43,7 @@ export class CoursesApiService {
     const courseToUpdate = {
       ...(courses.find(c => c.id === course.id)),
       applications: course.applications.map(app => app.id === updatedApplication.id ? updatedApplication : app)
-    }
+    };
 
     courses = courses.map(c => c.id === courseToUpdate.id ? courseToUpdate : c);
 

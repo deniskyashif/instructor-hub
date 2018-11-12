@@ -9,7 +9,7 @@ const COMPONENTS = [
   AppComponent,
   NotFoundComponent,
   NavbarComponent
-]
+];
 
 @NgModule({
   declarations: COMPONENTS,

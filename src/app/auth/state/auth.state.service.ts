@@ -1,5 +1,5 @@
-import { Injectable } from "@angular/core";
-import { Store } from '@ngrx/store';
+import { Injectable } from '@angular/core';
+import { Store, select } from '@ngrx/store';
 import * as fromAuth from './auth.reducer';
 import * as AuthActions from './auth.actions';
 import { Auth } from '../models/auth.model';
@@ -17,10 +17,10 @@ export class AuthStateService {
   }
 
   getLoginPending() {
-    return this.store.select(fromAuth.getLoginPending);
+    return this.store.pipe(select(fromAuth.getLoginPending));
   }
 
-  getLoginErrorMessage() : Observable<string> {
-    return this.store.select(fromAuth.getErrorMessage);
+  getLoginErrorMessage(): Observable<string> {
+    return this.store.pipe(select(fromAuth.getErrorMessage));
   }
 }

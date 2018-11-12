@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "trainer-hub": {
+    "instructor-hub": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/trainer-hub",
+            "outputPath": "dist/instructor-hub",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -61,18 +61,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "trainer-hub:build"
+            "browserTarget": "instructor-hub:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "trainer-hub:build:production"
+              "browserTarget": "instructor-hub:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "trainer-hub:build"
+            "browserTarget": "instructor-hub:build"
           }
         },
         "test": {
@@ -105,35 +105,7 @@
           }
         }
       }
-    },
-    "trainer-hub-e2e": {
-      "root": "e2e/",
-      "projectType": "application",
-      "prefix": "",
-      "architect": {
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "trainer-hub:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "trainer-hub:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
     }
   },
-  "defaultProject": "trainer-hub"
+  "defaultProject": "instructor-hub"
 }

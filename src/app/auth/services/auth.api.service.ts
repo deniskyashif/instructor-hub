@@ -11,8 +11,8 @@ export class AuthApiService {
 
   constructor() { }
 
-  login(credentials: Auth) : Observable<User> {
-    if(!(credentials.username && credentials.password)) {
+  login(credentials: Auth): Observable<User> {
+    if (!(credentials.username && credentials.password)) {
       return throwError('Invalid login credentials.');
     }
 

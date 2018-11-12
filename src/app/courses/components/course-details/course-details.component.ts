@@ -38,6 +38,6 @@ export class CourseDetailsComponent {
       Pending: '',
       Accepted: 'accepted',
       Rejected: 'rejected'
-    }[status]
+    }[status];
   }
 }

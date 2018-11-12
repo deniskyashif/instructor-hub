@@ -2,7 +2,6 @@ import { CourseActionsUnion, CourseActionTypes, ChangeApplicationStatus, LoadSuc
 import { Course } from '../models/course.model';
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import * as fromRoot from './../../core/state/app.reducers';
-import { ApplicationStatus } from '../models/application';
 
 export interface CoursesState {
   readonly courseList: Course[];
@@ -24,7 +23,7 @@ export function coursesReducer(state: CoursesState = initialState, action: Cours
       return {
         ...state,
         courseList: action.payload
-      }
+      };
     case CourseActionTypes.CreateSuccess:
       return {
         ...state,

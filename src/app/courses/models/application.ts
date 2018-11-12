@@ -6,7 +6,7 @@ export enum ApplicationStatus {
 
 export interface Application {
   id: number;
-  instructor: string,
-  offeredRate: number,
+  instructor: string;
+  offeredRate: number;
   status: ApplicationStatus;
 }

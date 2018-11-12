@@ -6,9 +6,7 @@ import { Store, select } from '@ngrx/store';
 import { Application, ApplicationStatus } from '../models/application';
 import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class CoursesStateService {
 
   constructor(private store: Store<fromCourses.State>) { }
