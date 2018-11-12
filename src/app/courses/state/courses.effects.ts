@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from "@ngrx/effects";
 import { CoursesApiService } from "../services/courses.api.service";
-import { Load, CourseActionTypes, LoadSuccess, Create, CreateSuccess, DeleteSuccess, ChangeApplicationStatus, ChangeApplicationStatusSuccess } from "../state/course.actions";
+import { Load, CourseActionTypes, LoadSuccess, Create, CreateSuccess, DeleteSuccess, ChangeApplicationStatus, ChangeApplicationStatusSuccess } from "./course.actions";
 import { map, exhaustMap } from "rxjs/operators";
 
 @Injectable()

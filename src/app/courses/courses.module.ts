@@ -12,8 +12,8 @@ import { CreateCourseFormComponent } from './components/create-course-form/creat
 import { SharedModule } from '../shared/shared.module';
 import { CoursesApiService } from './services/courses.api.service';
 import { EffectsModule } from '@ngrx/effects';
-import { CoursesEffects } from './effects/courses.effects';
-import { CoursesFacade } from './facade/courses.facade';
+import { CoursesEffects } from './state/courses.effects';
+import { CoursesStateService } from './state/courses.state.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,7 @@ import { CoursesFacade } from './facade/courses.facade';
   ],
   providers: [
     CoursesApiService,
-    CoursesFacade
+    CoursesStateService
   ]
 })
 export class CoursesModule { }

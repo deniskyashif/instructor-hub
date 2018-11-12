@@ -8,7 +8,7 @@ import { StoreModule } from '@ngrx/store';
 import { authReducer } from './state/auth.reducer';
 import { AuthApiService } from './services/auth.api.service';
 import { EffectsModule } from '@ngrx/effects';
-import { AuthEffects } from './effects/auth.effects';
+import { AuthEffects } from './state/auth.effects';
 
 @NgModule({
   declarations: [LoginComponent, LoginFormComponent],

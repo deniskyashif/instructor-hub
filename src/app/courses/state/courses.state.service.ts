@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Course } from '../models/course.model';
-import * as CourseActions from './../state/course.actions';
-import * as fromCourses from './../state/courses.reducer';
+import * as CourseActions from './course.actions';
+import * as fromCourses from './courses.reducer';
 import { Store, select } from '@ngrx/store';
 import { Application, ApplicationStatus } from '../models/application';
 import { Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class CoursesFacade {
+export class CoursesStateService {
 
   constructor(private store: Store<fromCourses.State>) { }
 

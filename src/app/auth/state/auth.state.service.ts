@@ -1,15 +1,15 @@
 import { Injectable } from "@angular/core";
 import { Store } from '@ngrx/store';
-import * as fromAuth from './../state/auth.reducer';
-import * as AuthActions from './../state/auth.actions';
-import { Auth } from './../models/auth.model';
+import * as fromAuth from './auth.reducer';
+import * as AuthActions from './auth.actions';
+import { Auth } from '../models/auth.model';
 import { Observable } from 'rxjs';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthFacade {
+export class AuthStateService {
   constructor(private store: Store<fromAuth.State>) { }
 
   login(credentials: Auth) {

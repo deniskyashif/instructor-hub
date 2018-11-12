@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Course } from '../../models/course.model';
 import { Observable } from 'rxjs';
 import { Application, ApplicationStatus } from '../../models/application';
-import { CoursesFacade } from '../../facade/courses.facade';
+import { CoursesStateService } from '../../state/courses.state.service';
 
 @Component({
   selector: 'app-course-board',
@@ -15,7 +15,7 @@ export class CourseBoardComponent implements OnInit {
   courses$: Observable<Course[]>;
   selectedCourse$: Observable<Course>;
 
-  constructor(private courses: CoursesFacade) { }
+  constructor(private courses: CoursesStateService) { }
 
   ngOnInit() {
     this.courses.load();

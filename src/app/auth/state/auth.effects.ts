@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from "@ngrx/effects";
 import { AuthApiService } from "../services/auth.api.service";
 import { Router } from "@angular/router";
-import { AuthActionTypes, Login, LoginSuccess, LoginFailure, LoginRedirect } from "../state/auth.actions";
+import { AuthActionTypes, Login, LoginSuccess, LoginFailure, LoginRedirect } from "./auth.actions";
 import { map, exhaustMap, catchError, tap } from "rxjs/operators";
 import { Auth } from "../models/auth.model";
 import { of } from "rxjs";

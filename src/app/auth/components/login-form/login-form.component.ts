@@ -1,7 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as fromAuth from '../../state/auth.reducer';
-import * as AuthActions from './../../state/auth.actions';
 import { Auth } from '../../models/auth.model';
 
 @Component({

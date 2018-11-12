@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Course } from '../../models/course.model';
 import { Router } from '@angular/router';
-import { CoursesFacade } from '../../facade/courses.facade';
+import { CoursesStateService } from '../../state/courses.state.service';
 
 @Component({
   selector: 'app-create-course',
@@ -12,7 +12,7 @@ import { CoursesFacade } from '../../facade/courses.facade';
 export class CreateCourseComponent {
 
   constructor(
-    private courses: CoursesFacade,
+    private courses: CoursesStateService,
     private router: Router,
     private location: Location) { }
 
