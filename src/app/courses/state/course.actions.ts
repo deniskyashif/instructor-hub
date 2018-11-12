@@ -3,8 +3,8 @@ import { Course } from '../models/course.model';
 import { Application, ApplicationStatus } from '../models/application';
 
 export enum CourseActionTypes {
-  Get = '[COURSE] Get',
-  GetSuccess = '[COURSE] GetSuccess',
+  Load = '[COURSE] Load',
+  LoadSuccess = '[COURSE] LoadSuccess',
   Create = '[COURSE] Create',
   CreateSuccess = '[COURSE] CreateSuccess',
   Delete = '[COURSE] Delete',
@@ -14,14 +14,14 @@ export enum CourseActionTypes {
   ChangeApplicationStatusSuccess = '[COURSE] ChangeApplicationStatusSuccess'
 }
 
-export class Get implements Action {
-  readonly type = CourseActionTypes.Get;
+export class Load implements Action {
+  readonly type = CourseActionTypes.Load;
 
   constructor(public payload: string = '') { }
 }
 
-export class GetSuccess implements Action {
-  readonly type = CourseActionTypes.GetSuccess;
+export class LoadSuccess implements Action {
+  readonly type = CourseActionTypes.LoadSuccess;
 
   constructor(public payload: Course[]) { }
 }
@@ -68,8 +68,8 @@ export class ChangeApplicationStatusSuccess implements Action {
   constructor(public payload: Course) { }
 }
 
-export type CourseActionsUnion = Get |
-  GetSuccess |
+export type CourseActionsUnion = Load |
+  LoadSuccess |
   Create |
   CreateSuccess |
   Delete |

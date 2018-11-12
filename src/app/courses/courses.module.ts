@@ -13,6 +13,7 @@ import { SharedModule } from '../shared/shared.module';
 import { CoursesApiService } from './services/courses.api.service';
 import { EffectsModule } from '@ngrx/effects';
 import { CoursesEffects } from './effects/courses.effects';
+import { CoursesFacade } from './facade/courses.facade';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { CoursesEffects } from './effects/courses.effects';
     EffectsModule.forFeature([CoursesEffects])
   ],
   providers: [
-    CoursesApiService
+    CoursesApiService,
+    CoursesFacade
   ]
 })
 export class CoursesModule { }

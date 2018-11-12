@@ -1,4 +1,4 @@
-import { CourseActionsUnion, CourseActionTypes, ChangeApplicationStatus, GetSuccess } from './course.actions';
+import { CourseActionsUnion, CourseActionTypes, ChangeApplicationStatus, LoadSuccess } from './course.actions';
 import { Course } from '../models/course.model';
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import * as fromRoot from './../../core/state/app.reducers';
@@ -20,7 +20,7 @@ const initialState: CoursesState = {
 
 export function coursesReducer(state: CoursesState = initialState, action: CourseActionsUnion): CoursesState {
   switch (action.type) {
-    case CourseActionTypes.GetSuccess:
+    case CourseActionTypes.LoadSuccess:
       return {
         ...state,
         courseList: action.payload

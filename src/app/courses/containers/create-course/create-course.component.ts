@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Course } from '../../models/course.model';
-import { Store } from '@ngrx/store';
-import * as CourseActions from './../../state/course.actions';
-import * as fromCourses from '../../state/courses.reducer';
 import { Router } from '@angular/router';
+import { CoursesFacade } from '../../facade/courses.facade';
 
 @Component({
   selector: 'app-create-course',
@@ -13,12 +11,13 @@ import { Router } from '@angular/router';
 })
 export class CreateCourseComponent {
 
-  constructor(private store: Store<fromCourses.CoursesState>,
+  constructor(
+    private courses: CoursesFacade,
     private router: Router,
     private location: Location) { }
 
   createCourse(course: Course) {
-    this.store.dispatch(new CourseActions.Create(course));
+    this.courses.create(course);
     this.router.navigate(['/courses']);
   }
 

@@ -14,6 +14,8 @@ export class CoursesApiService {
 
   constructor() { }
 
+  private baseUrl = '/api/courses';
+
   get(query: string): Observable<Course[]> {
     const lowerCasedQuery = query.toLowerCase();
     const predicate = (c: Course) =>
@@ -25,7 +27,7 @@ export class CoursesApiService {
   create(course: Course): Observable<Course> {
     const newCourse = {
       ...course,
-      id: courses.length[courses.length - 1].id + 1
+      id: courses[courses.length - 1].id + 1
     }
 
     courses = [...courses, newCourse];

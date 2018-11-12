@@ -13,7 +13,10 @@
       <app-course-list [courses]="courses$ | async" [selectedCourse]="selectedCourse$ | async" (courseSelect)="toggleSelectCourse($event)"></app-course-list>
     </div>
     <div class="col-6">
-      <app-course-details [course]="selectedCourse$ | async" (delete)="delete($event)" (applicationStatusChange)="updateApplicationStatus($event)"></app-course-details>
+      <app-course-details [course]="selectedCourse$ | async"
+        (delete)="delete($event)"
+        (applicationStatusChange)="updateApplicationStatus($event)">
+      </app-course-details>
     </div>
   </div>
 </div>

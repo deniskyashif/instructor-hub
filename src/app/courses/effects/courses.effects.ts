@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from "@ngrx/effects";
 import { CoursesApiService } from "../services/courses.api.service";
-import { Get, CourseActionTypes, GetSuccess, Create, CreateSuccess, DeleteSuccess, ChangeApplicationStatus, ChangeApplicationStatusSuccess } from "../state/course.actions";
+import { Load, CourseActionTypes, LoadSuccess, Create, CreateSuccess, DeleteSuccess, ChangeApplicationStatus, ChangeApplicationStatusSuccess } from "../state/course.actions";
 import { map, exhaustMap } from "rxjs/operators";
 
 @Injectable()
@@ -9,11 +9,11 @@ export class CoursesEffects {
 
   @Effect()
   get$ = this.actions$.pipe(
-    ofType<Get>(CourseActionTypes.Get),
+    ofType<Load>(CourseActionTypes.Load),
     map(action => action.payload),
     exhaustMap((query: string) =>
       this.coursesApi.get(query)
-        .pipe(map(courses => new GetSuccess(courses)))));
+        .pipe(map(courses => new LoadSuccess(courses)))));
 
   @Effect()
   create$ = this.actions$.pipe(

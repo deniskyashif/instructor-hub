@@ -1,10 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Course } from '../../models/course.model';
-import { Store, select, createSelector, createFeatureSelector } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import * as CourseActions from './../../state/course.actions';
-import * as fromCourses from '../../state/courses.reducer';
 import { Application, ApplicationStatus } from '../../models/application';
+import { CoursesFacade } from '../../facade/courses.facade';
 
 @Component({
   selector: 'app-course-board',
@@ -17,27 +15,27 @@ export class CourseBoardComponent implements OnInit {
   courses$: Observable<Course[]>;
   selectedCourse$: Observable<Course>;
 
-  constructor(private store: Store<fromCourses.State>) { }
+  constructor(private courses: CoursesFacade) { }
 
   ngOnInit() {
-    this.store.dispatch(new CourseActions.Get());
-    this.courses$ = this.store.pipe(select(fromCourses.getCourseList));
-    this.selectedCourse$ = this.store.pipe(select(fromCourses.getSelectedCourse));
+    this.courses.load();
+    this.courses$ = this.courses.getCourseList();
+    this.selectedCourse$ = this.courses.getSelectedCourse();
   }
 
   toggleSelectCourse(course: Course) {
-    this.store.dispatch(new CourseActions.ToggleSelected(course.id));
-  }
-
-  updateApplicationStatus(event: {course: Course, app: Application, status: ApplicationStatus}) {
-    this.store.dispatch(new CourseActions.ChangeApplicationStatus(event));
+    this.courses.toggleSelected(course.id);
   }
 
   delete(course: Course) {
-    this.store.dispatch(new CourseActions.Delete(course));
+    this.courses.delete(course);
   }
 
   search(query: string) {
-    this.store.dispatch(new CourseActions.Get(query));
+    this.courses.search(query);
+  }
+
+  updateApplicationStatus(event: {course: Course, app: Application, status: ApplicationStatus}) {
+    this.courses.updateApplicationStatus(event.course, event.app, event.status);
   }
 }
