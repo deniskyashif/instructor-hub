@@ -1,6 +1,10 @@
 # Instructor Hub
 
-**Demo app for the "Scalable Angular Apps" talk.**
+**Demo app for the "Scalable Angular Apps" talk.**  
+
+[Slides](https://speakerdeck.com/deniskyashif/scalable-angular-applications)  
+
+Shocases a sample Angular app architecture implementing Redux using **[ngrx](https://github.com/ngrx/platform)**.  
 
 `git clone https://github.com/deniskyashif/instructor-hub.git`  
 `cd instructor-hub`  
